@@ -1,9 +1,9 @@
-.PHONY: n nb setup
+.PHONY: browser jupyter setup
 
-n:
+browser:
 	PYTHONPATH=`pwd` screen .venv/bin/jupyter notebook --ip 0.0.0.0 --port=8833 --no-browser .
 
-nb:
+jupyter:
 	PYTHONPATH=`pwd` screen .venv/bin/jupyter notebook --ip 0.0.0.0 --port=8833 .
 
 setup:

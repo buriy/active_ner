@@ -56,6 +56,12 @@ class Client:
             sa.label = self.label_by_name[label]
             sa.save()
 
+    def del_unapproved(self, max_del):
+        from api.models import Document
+        ids = self.project.documents.all().filter(annotations_approved_by__isnull=True).values_list('id', flat=True)
+        Document.objects.filter(id__in=ids[:max_del]).delete()
+
+
     def add_docs(self, docs, max_add=None):
         existing_docs = self.get_doc_texts()
         added = 0

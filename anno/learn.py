@@ -1,3 +1,5 @@
+import sys
+
 from anno.anno import Client, get_project_by_id, init_django
 from anno.trainer import train_model, get_predictions
 
@@ -12,7 +14,9 @@ class Learner:
         print("Docs to train:", len(docs))
         nlp = train_model(labels, docs)
         results = get_predictions(nlp, texts)
+        # print([r['predicts'] for r in results])
         results = sorted(results, key=lambda x: x['unsure'], reverse=True)
+        self.client.del_unapproved(max_add)
         self.client.add_docs(results, max_add=max_add)
 
 
@@ -26,6 +30,7 @@ def get_records():
             break
     return test_set
 
+
 if __name__ == '__main__':
     init_django()
     learner = Learner(get_project_by_id(id=2))
@@ -33,4 +38,4 @@ if __name__ == '__main__':
     from corus import load_lenta
 
     texts = get_records()
-    learner.run(texts, max_add=5)
+    learner.run(texts, max_add=int(sys.argv[1]))
