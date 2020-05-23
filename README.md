@@ -1,6 +1,6 @@
 # active_ner
 
-Active learning for Doccano, based on spacy .
+Active learning for Doccano, based on spacy NER.
 
 
 INSTALL:
