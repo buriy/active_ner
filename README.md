@@ -1,5 +1,8 @@
 # active_ner
 
+Active learning for Doccano, based on spacy .
+
+
 INSTALL:
 
 1. create a `.env` file in the project root dir with a text like this:
@@ -19,7 +22,7 @@ run
 ```
 .venv/bin/python -m anno.learn 5
 ```
-The script will do the following:
- - download lenta dataset from Corus (if it's not already downloaded)
- - remove up to 5 unapproved documents from the database
- - will add instead 5 annotated documents (with predicted annotations).
+The example script works the following way:
+ - downloads lenta dataset from Corus (if it's not already downloaded)
+ - removes up to 5 unapproved documents from the database
+ - adds 5 best-to-annotate auto-annotated documents.
