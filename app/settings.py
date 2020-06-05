@@ -12,12 +12,10 @@ also be set in a `.env` file in the project base directory.
 """
 from os import path
 
-import django_heroku
 import dj_database_url
+import django_heroku
 from environs import Env
 from furl import furl
-
-print("Config installed")
 
 # Build paths inside the project like this: path.join(BASE_DIR, ...)
 BASE_DIR = path.dirname(path.dirname(path.abspath(__file__)))
@@ -51,7 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    #'server.apps.ServerConfig',
+    # 'server.apps.ServerConfig',
     'api.apps.ApiConfig',
     'widget_tweaks',
     'rest_framework',
@@ -191,7 +189,6 @@ DATABASES = {
     }
 }
 
-
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
 
@@ -269,12 +266,12 @@ if DATABASES['default'].get('ENGINE') == 'django.db.backends.sqlite3':
 if DATABASES['default'].get('ENGINE') == 'django.db.backends.mysql':
     DATABASES['default'].get('OPTIONS', {}).pop('sslmode', None)
     if env('MYSQL_SSL_CA', None):
-        DATABASES['default'].setdefault('OPTIONS', {})\
+        DATABASES['default'].setdefault('OPTIONS', {}) \
             .setdefault('ssl', {}).setdefault('ca', env('MYSQL_SSL_CA', None))
 
 # default to a sensible modern driver for Azure SQL
 if DATABASES['default'].get('ENGINE') == 'sql_server.pyodbc':
-    DATABASES['default'].setdefault('OPTIONS', {})\
+    DATABASES['default'].setdefault('OPTIONS', {}) \
         .setdefault('driver', 'ODBC Driver 17 for SQL Server')
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
@@ -307,7 +304,6 @@ EMAIL_PORT = env.int('EMAIL_PORT', 587)
 
 if not EMAIL_HOST:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
 
 if DEBUG:
     CORS_ORIGIN_WHITELIST = (
